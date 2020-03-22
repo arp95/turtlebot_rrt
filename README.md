@@ -1,4 +1,4 @@
-# Path Planning using A-star Algorithm
+# RRT based Path Planning
 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE.md)
 ---
