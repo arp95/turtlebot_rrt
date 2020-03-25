@@ -41,7 +41,7 @@ class RRT(object):
         self.yLength = 200.0
         self.clearance = clearance
         self.radius = radius
-        self.numIterations = 10
+        self.numIterations = 1000
         self.path = {}
         self.graph = {}
         self.vertices = []
@@ -154,7 +154,7 @@ class RRT(object):
                     size.append(15)      
         obstacleX = np.array(obstacleX)
         obstacleY = np.array(obstacleY)
-        plt.scatter(obstacleX, obstacleY, color='b', s=size)
+        plt.scatter(obstacleX, obstacleY, color='black', s=size)
         
         # plot vertices
         vertexX = []
@@ -197,9 +197,10 @@ class RRT(object):
         # initialize graph
         currIteration = 0
         self.vertices.append(self.start)
+        flag = True
         
         # run algo
-        while(currIteration < self.numIterations):
+        while(flag):
             # generate random x and y
             (currX, currY) = self.RandomPosition()
             
@@ -216,7 +217,12 @@ class RRT(object):
             if((self.IsValid(newX, newY) == True) and (self.IsObstacle(newX, newY) == False)):
                 self.vertices.append((newX, newY))
             
+                # check distance between vertex and goal vertex
+                if(self.EucDistance(newX, newY, self.goal[0], self.goal[1]) < 4.5):
+                    print((newX, newY))
+                    flag = False
+            
             # next iteration
             currIteration = currIteration + 1
         
-        print(self.vertices)
+        #print(self.vertices)
