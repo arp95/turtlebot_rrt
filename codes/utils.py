@@ -41,10 +41,10 @@ class RRT(object):
         self.yLength = 200.0
         self.clearance = clearance
         self.radius = radius
-        self.numIterations = 1000
         self.path = {}
-        self.graph = {}
         self.vertices = []
+        self.backtrackNodes = []
+        self.backtrackNode = None
     
     # move is valid or not
     def IsValid(self, currX, currY):
@@ -157,17 +157,17 @@ class RRT(object):
         plt.scatter(obstacleX, obstacleY, color='black', s=size)
         
         # plot vertices
-        vertexX = []
-        vertexY = []
+        start_vertexX = []
+        start_vertexY = []
+        end_vertexX = []
+        end_vertexY = []
         size = []
-        for vertex in self.vertices:
-            vertexX.append(vertex[0])
-            vertexY.append(vertex[1])
-            size.append(15)
-        vertexX = np.array(vertexX)
-        vertexY = np.array(vertexY)
-        plt.scatter(vertexX, vertexY, color='g', s=size)
-        
+        for index in range(1, len(self.backtrackNodes)):
+            start_vertexX.append(self.backtrackNodes[index-1][0])
+            start_vertexY.append(self.backtrackNodes[index-1][1])
+            end_vertexX.append(self.backtrackNodes[index][0] - self.backtrackNodes[index-1][0])
+            end_vertexY.append(self.backtrackNodes[index][1] - self.backtrackNodes[index-1][1])
+        plt.quiver(np.array((start_vertexX)), np.array((start_vertexY)), np.array((end_vertexX)), np.array((end_vertexY)), units = 'xy', scale = 1, color = 'r', label='Backtrack path')
         plt.show()
     
     # random position generator
@@ -192,11 +192,25 @@ class RRT(object):
         # return nearest vertex
         return nearestVertex
     
+    # add vertex to graph
+    def AddVertexToGraph(self, nearX, nearY, currX, currY):
+        newX = round((nearX + currX) / 2.0, 2)
+        newY = round((nearY + currY) / 2.0, 2)
+        if((self.IsValid(newX, newY) == True) and (self.IsObstacle(newX, newY) == False)):
+            self.vertices.append((newX, newY))
+            self.path[(newX, newY)] = (nearX, nearY)
+            
+            if(self.EucDistance(newX, newY, self.goal[0], self.goal[1]) < 4.5):
+                self.backtrackNode = (newX, newY)
+                return True
+        return False
+    
     # rrt algo
     def Search(self):
         # initialize graph
         currIteration = 0
         self.vertices.append(self.start)
+        self.path[self.start] = -1
         flag = True
         
         # run algo
@@ -212,17 +226,17 @@ class RRT(object):
             (nearX, nearY) = self.NearestNeighbour(currX, currY)
             
             # add vertex to graph if not an obstacle
-            newX = round((nearX + currX) / 2.0, 2)
-            newY = round((nearY + currY) / 2.0, 2)
-            if((self.IsValid(newX, newY) == True) and (self.IsObstacle(newX, newY) == False)):
-                self.vertices.append((newX, newY))
-            
-                # check distance between vertex and goal vertex
-                if(self.EucDistance(newX, newY, self.goal[0], self.goal[1]) < 4.5):
-                    print((newX, newY))
-                    flag = False
+            exitCondition = self.AddVertexToGraph(nearX, nearY, currX, currY)
+            if(exitCondition):
+                flag = False
             
             # next iteration
             currIteration = currIteration + 1
         
-        #print(self.vertices)
+        # backtrack nodes
+        node = self.backtrackNode
+        while(node != self.start):
+            self.backtrackNodes.append(node)
+            node = self.path[node]
+        self.backtrackNodes.append(self.start)
+        self.backtrackNodes = list(reversed(self.backtrackNodes))
