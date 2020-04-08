@@ -1,4 +1,4 @@
-# RRT based Path Planning
+# ROS-based Path Planning for Turtlebot Robot(Non-holonomic) using Informed Rapidly-exploring Random Trees (Informed RRT*).
 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE.md)
 ---
@@ -21,4 +21,4 @@ python astar.py
 
 
 ### Software Required
-To run the .py files, use Python 3. Standard Python 3 libraries like numpy, heapq and OpenCV are used.
+To run the .py files, use Python 3. Standard Python 3 libraries like numpy, heapq and matplotlib are used.
