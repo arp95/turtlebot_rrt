@@ -45,6 +45,9 @@ if(rrt.IsValid(start[0], start[1])):
             if(rrt.IsObstacle(goal[0], goal[1]) == False):
                 (explored_states, backtrack_states) = rrt.search()
                 
+                # animate the path
+                rrt.animate(explored_states, backtrack_states)
+                
                 print(len(explored_states))
                 print(len(backtrack_states))
             else:
