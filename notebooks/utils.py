@@ -56,10 +56,10 @@ class RRTStar(object):
         self.yLength = 500
         
         # clearance variable - distance of the robot from the obstacle
-        self.clearance = 0.0
+        self.clearance = 25.0
         
         # radius variable - the radius of the robot (taken from turtlebot datasheet)
-        self.radius = 0.0
+        self.radius = 20.0
         
         # wheelDistance - the distance between wheels (taken from turtlebot datasheet)
         self.wheelDistance = 34.0
@@ -529,10 +529,10 @@ class InformedRRTStar(object):
         self.yLength = 500
         
         # clearance variable - distance of the robot from the obstacle
-        self.clearance = 0.0
+        self.clearance = 25.0
         
         # radius variable - the radius of the robot (taken from turtlebot datasheet)
-        self.radius = 0.0
+        self.radius = 20.0
         
         # wheelDistance - the distance between wheels (taken from turtlebot datasheet)
         self.wheelDistance = 34.0
@@ -921,7 +921,7 @@ class InformedRRTStar(object):
         return parent
     
     
-    # rrt-star algo
+    # informed rrt-star algo
     def search(self):
         """
         Outputs:

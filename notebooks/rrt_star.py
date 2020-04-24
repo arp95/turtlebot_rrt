@@ -35,8 +35,8 @@ goalX = float(input("Enter the x-coordinate for goal node : "))
 goalY = float(input("Enter the y-coordinate for goal node : "))
 
 # take start and goal node as input
-start = (startX, startY)
-goal = (goalX, goalY)
+start = (startX * 100.0, startY * 100.0)
+goal = (goalX * 100.0, goalY * 100.0)
 rrt = RRTStar(start, goal)
 
 if(rrt.IsValid(start[0], start[1])):
