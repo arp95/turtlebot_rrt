@@ -9,6 +9,13 @@
 Arpit Aggarwal Shantam Bajpai
 
 
+### Results
+The following is an example of Informed RRT-star algorithm applied on a rigid robot:
+![Screenshot](output/informed_rrt_star.png)
+
+The following is an example of RRT-star algorithm applied on a rigid robot:
+![Screenshot](output/rrt_star.png)
+
 
 ### Result Video
 
@@ -78,9 +85,3 @@ Enter the clearance(Basically maximum distance of the robot from the obstacle gi
 ```
 
 After entering all these values in the terminal, the Informed RRT-star algorithm finds the optimum path between the entered start node and goal node. Then the "dvx, dvy, dw" values, which are the velocities in x-direction and y-direction and angular velocity along z-axis are published on the ROS Topic of the Turtlebot to move it from one point to another point.
-
-
-
-### Results
-The following is an example of Informed RRT-star algorithm applied on a rigid robot:
-![Screenshot](output_3.jpg)
