@@ -1058,36 +1058,31 @@ goal = (goalX * 100.0, goalY * 100.0)
 rrt = RRTStar(start, goal)
 informed_rrt = InformedRRTStar(start, goal)
 
-"""
-if(astar.IsValid(start[0], start[1])):
-    if(astar.IsValid(goal[0], goal[1])):
-        if(astar.IsObstacle(start[0],start[1]) == False):
-            if(astar.IsObstacle(goal[0], goal[1]) == False):
-                states = astar.search()
-                explored_states = states[0]
-                backtrack_states = states[1]
-                actions = states[2]
-
+if(informed_rrt.IsValid(start[0], start[1])):
+    if(informed_rrt.IsValid(goal[0], goal[1])):
+        if(informed_rrt.IsObstacle(start[0],start[1]) == False):
+            if(informed_rrt.IsObstacle(goal[0], goal[1]) == False):
+                (explored_states, backtrack_states) = informed_rrt.search()
+                
+                # animate the path
+                #rrt.animate(explored_states, backtrack_states)
+                
                 # move robot in ROS from start to goal node
-                for index in range(0, len(actions)):
-                    dvx, dvy, dw = actions[index]
-                    move_robot(pub_vel, dvx, dvy, dw) 
+                #for index in range(0, len(actions)):
+                #    dvx, dvy, dw = actions[index]
+                #    move_robot(pub_vel, dvx, dvy, dw) 
 
-                # print optimal path found or not
-                if(len(backtrack_states) == 0):
-                    print("\nNo optimal path found.")
-                else:
-                    print("\nOptimal path found.")
+                print(len(explored_states))
+                print(len(backtrack_states))
             else:
                 print("The entered goal node is an obstacle ")
-                print("Please check README.md file for running turtlebot_astar.py file.")
+                print("Please check README.md file for running informed_rrt_star.py file.")
         else:
             print("The entered start node is an obstacle ")
-            print("Please check README.md file for running turtlebot_astar.py file.")
+            print("Please check README.md file for running informed_rrt_star.py file.")
     else:
         print("The entered goal node outside the map ")
-        print("Please check README.md file for running turtlebot_astar.py file.")
+        print("Please check README.md file for running informed_rrt_star.py file.")
 else:
     print("The entered start node is outside the map ")
-    print("Please check README.md file for running turtlebot_astar.py file.")
-"""
+    print("Please check README.md file for running informed_rrt_star.py file.")
