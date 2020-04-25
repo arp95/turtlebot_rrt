@@ -472,7 +472,7 @@ class RRTStar(object):
         backtrackNode = None
         
         # run the rrt-star algo
-        for step in range(0, 25000):
+        for step in range(0, 10000):
             
             # get random node
             (x_rand_x, x_rand_y) = self.getRandomPosition()
@@ -974,7 +974,7 @@ class InformedRRTStar(object):
         c_matrix = np.dot(np.dot(u_matrix, np.diag([1.0, 1.0, np.linalg.det(u_matrix) * np.linalg.det(np.transpose(vh_matrix))])), vh_matrix)
         
         # run the rrt-star algo
-        for step in range(0, 25000):
+        for step in range(0, 10000):
             
             # get random node
             (x_rand_x, x_rand_y) = self.getRandomPosition(cBest, cMin, xCenter, c_matrix)
@@ -1076,13 +1076,13 @@ if(informed_rrt.IsValid(start[0], start[1])):
                 print(len(backtrack_states))
             else:
                 print("The entered goal node is an obstacle ")
-                print("Please check README.md file for running informed_rrt_star.py file.")
+                print("Please check README.md file for running turtlebot_rrt.py file.")
         else:
             print("The entered start node is an obstacle ")
-            print("Please check README.md file for running informed_rrt_star.py file.")
+            print("Please check README.md file for running turtlebot_rrt.py file.")
     else:
         print("The entered goal node outside the map ")
-        print("Please check README.md file for running informed_rrt_star.py file.")
+        print("Please check README.md file for running turtlebot_rrt.py file.")
 else:
     print("The entered start node is outside the map ")
-    print("Please check README.md file for running informed_rrt_star.py file.")
+    print("Please check README.md file for running turtlebot_rrt.py file.")
