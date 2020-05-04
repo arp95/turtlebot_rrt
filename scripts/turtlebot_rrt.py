@@ -29,13 +29,13 @@
 # header files
 import numpy as np
 import math
-import matplotlib.pyplot as plt
-import matplotlib.lines as mlines
-from heapq import heappush, heappop
 import rospy
 from geometry_msgs.msg import Point, Twist, PoseStamped
 from math import pow, atan2, sqrt
 import time
+import random
+from nav_msgs.msg import Odometry
+from tf.transformations import euler_from_quaternion
 
 
 # move robot function
@@ -1039,8 +1039,61 @@ class InformedRRTStar(object):
         return (self.vertices, backtrackStates)
 
 
+
+
+# global variables	
+x = 4.0	
+y = 3.0	
+theta = 0.0	
+
+# callback for subscriber	
+def callback(msg):	
+    global x 	
+    global y	
+    global theta	
+
+    x = msg.pose.pose.position.x	
+    y = msg.pose.pose.position.y	
+    rot_q = msg.pose.pose.orientation
+    (roll, pitch, theta) = euler_from_quaternion([rot_q.x, rot_q.y, rot_q.z, rot_q.w])
+
+
+# function to set goal point
+def go_to_point(robot_x, robot_y, pub_vel):
+    global x
+    global y
+    global theta
+
+    r = rospy.Rate(4)
+    goal = Point()
+    vel_value = Twist()
+    goal.x = robot_x
+    goal.y = robot_y
+
+    while not rospy.is_shutdown():
+        inc_x = goal.x - x
+        inc_y = goal.y - y
+        angle_to_goal = atan2(inc_y, inc_x)
+
+        if abs(angle_to_goal - theta) > 0.1:
+            vel_value.linear.x = 0
+            vel_value.angular.z = 0.05
+        else:
+            vel_value.linear.x = 0.05
+            vel_value.angular.z = 0
+
+        if(inc_x < 0.01 and inc_y < 0.01):
+            vel_value.linear.x = 0
+            vel_value.angular.z = 0
+            pub_vel.publish(vel_value)
+            break
+        pub_vel.publish(vel_value)
+        r.sleep()
+
+
 # make ros publisher
 rospy.init_node('turtlebot_rrt')
+sub = rospy.Subscriber('/odom', Odometry, callback)
 pub_vel = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
 time.sleep(2)
 
@@ -1052,7 +1105,6 @@ startY = float(input("Enter the y-coordinate for start node(in m) : "))
 goalX = float(input("Enter the x-coordinate for goal node(in m) : "))
 goalY = float(input("Enter the y-coordinate for goal node(in m) : "))
 
-# take start and goal node as input
 start = (startX * 100.0, startY * 100.0)
 goal = (goalX * 100.0, goalY * 100.0)
 rrt = RRTStar(start, goal)
@@ -1064,14 +1116,19 @@ if(informed_rrt.IsValid(start[0], start[1])):
             if(informed_rrt.IsObstacle(goal[0], goal[1]) == False):
                 (explored_states, backtrack_states) = informed_rrt.search()
                 
-                print(explored_states[0])
                 # animate the path
                 #rrt.animate(explored_states, backtrack_states)
                 
                 # move robot in ROS from start to goal node
-                #for index in range(0, len(actions)):
-                #    dvx, dvy, dw = actions[index]
-                #    move_robot(pub_vel, dvx, dvy, dw) 
+                global x
+                global y
+                global theta
+
+                for index in range(1, len(backtrack_states)):
+                    print(backtrack_states[index])
+                    go_to_point(backtrack_states[index][0] / 100.0, backtrack_states[index][1] / 100.0, pub_vel)
+                    x = backtrack_states[index][0] / 100.0
+                    y = backtrack_states[index][1] / 100.0
 
                 print(len(explored_states))
                 print(len(backtrack_states))
