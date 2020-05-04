@@ -1,8 +1,7 @@
-# Using Informed RRT-star Algorithm on ROS Turtlebot
+# Informed RRT-star Algorithm on ROS Turtlebot
 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE.md)
 ---
-
 
 
 ### Authors
@@ -17,22 +16,12 @@ The following is an example of RRT-star algorithm applied on a rigid robot:
 ![Screenshot](output/rrt_star.png)
 
 
-### Result Video
-
-This is a sample video of the application of Informed RRT-Star algorithm on the Turtlebot.
-
-![](https://j.gifs.com/NLygjm.gif)
-
-
-
 ### Software Required
 For this project you will need to install the rospy, numpy, matplotlib and gazebo to run the simulations.
 
 
-
 ### Simulation platforms used
 For the simulation we used the gazebo and turtlebot2 package. The world file is located in the world folder and defines the setup of the gazebo environment.
-
 
 
 ### Instructions for running the code
@@ -76,12 +65,8 @@ Once you run the environment a second terminal will pop up in which you need to 
 ```
 x coordinate for the start node(in meters, same as the one given in the roslaunch command):
 y coordinate for the start node(in meters, same as the one given in the roslaunch command):
-orientation for the start node(in radians, same as the yaw value given in the roslaunch command):
 x-coordinate of the goal node(in meters):
 y-coordinate of the goal node(in meters):
-Enter the first value of RPM:
-Enter the second value of RPM:
-Enter the clearance(Basically maximum distance of the robot from the obstacle given in meters):
 ```
 
-After entering all these values in the terminal, the Informed RRT-star algorithm finds the optimum path between the entered start node and goal node. Then the "dvx, dvy, dw" values, which are the velocities in x-direction and y-direction and angular velocity along z-axis are published on the ROS Topic of the Turtlebot to move it from one point to another point.
+After entering all these values in the terminal, the Informed RRT-star algorithm finds the optimum path between the entered start node and goal node.
