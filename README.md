@@ -56,7 +56,7 @@ Once all the above steps have been performed lets source our catkin workspace an
 
 ```
 source ./devel/setup.bash
-roslaunch turtlebot_rrt demo.launch x:=0 y:=3 yaw:=0
+roslaunch turtlebot_rrt demo.launch x:=4 y:=3 yaw:=0
 ```
 
 Above as you can see in the end I have given the x,y and yaw arguments in the command line. This indicates the initial spawn position of the turtlebot in the gazebo environment. The coordinates are represented by (x,y) and the orientation is given by the yaw argument.
