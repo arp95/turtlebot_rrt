@@ -1040,7 +1040,7 @@ class InformedRRTStar(object):
 
 
 # make ros publisher
-rospy.init_node('turtlebot_astar')
+rospy.init_node('turtlebot_rrt')
 pub_vel = rospy.Publisher('/mobile_base/commands/velocity', Twist, queue_size=10)
 time.sleep(2)
 
@@ -1064,6 +1064,7 @@ if(informed_rrt.IsValid(start[0], start[1])):
             if(informed_rrt.IsObstacle(goal[0], goal[1]) == False):
                 (explored_states, backtrack_states) = informed_rrt.search()
                 
+                print(explored_states[0])
                 # animate the path
                 #rrt.animate(explored_states, backtrack_states)
                 
