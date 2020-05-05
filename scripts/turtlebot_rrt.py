@@ -1069,6 +1069,9 @@ def go_to_point(robot_x, robot_y, pub_vel):
     vel_value = Twist()
     goal.x = robot_x
     goal.y = robot_y
+    #print(goal)
+    #print(x)
+    #print(y)
 
     while not rospy.is_shutdown():
         inc_x = goal.x - x
@@ -1082,7 +1085,7 @@ def go_to_point(robot_x, robot_y, pub_vel):
             vel_value.linear.x = 0.05
             vel_value.angular.z = 0
 
-        if(inc_x < 0.01 and inc_y < 0.01):
+        if(inc_x < 0.1 and inc_y < 0.1):
             vel_value.linear.x = 0
             vel_value.angular.z = 0
             pub_vel.publish(vel_value)
@@ -1117,18 +1120,18 @@ if(informed_rrt.IsValid(start[0], start[1])):
                 (explored_states, backtrack_states) = informed_rrt.search()
                 
                 # animate the path
-                #rrt.animate(explored_states, backtrack_states)
+                #informed_rrt.animate(explored_states, backtrack_states)
                 
                 # move robot in ROS from start to goal node
-                global x
-                global y
-                global theta
+                #global x
+                #global y
+                #global theta
 
                 for index in range(1, len(backtrack_states)):
                     print(backtrack_states[index])
                     go_to_point(backtrack_states[index][0] / 100.0, backtrack_states[index][1] / 100.0, pub_vel)
-                    x = backtrack_states[index][0] / 100.0
-                    y = backtrack_states[index][1] / 100.0
+                    #x = backtrack_states[index][0] / 100.0
+                    #y = backtrack_states[index][1] / 100.0
 
                 print(len(explored_states))
                 print(len(backtrack_states))
