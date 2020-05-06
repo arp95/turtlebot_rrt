@@ -1,4 +1,4 @@
-# Informed RRT-star Algorithm on ROS Turtlebot
+# Informed RRT-star Motion Planning Algorithm on ROS Turtlebot 2
 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE.md)
 ---
@@ -10,10 +10,10 @@ Arpit Aggarwal Shantam Bajpai
 
 ### Results
 The following is an example of Informed RRT-star algorithm applied on a rigid robot:
-![Screenshot](output/informed_rrt_star.png)
+![Screenshot](output/case2_informedrrtstar_10000_29.jpg)
 
 The following is an example of RRT-star algorithm applied on a rigid robot:
-![Screenshot](output/rrt_star.png)
+![Screenshot](output/case2_rrtstar_10000_13.jpg)
 
 
 ### Software Required
