@@ -1,11 +1,11 @@
-# Informed RRT-star Motion Planning Algorithm on ROS Turtlebot 2
+# ROS-based Path Planning for Turtlebot Robot using Informed RRT* algorithm
 
 [![Packagist](https://img.shields.io/packagist/l/doctrine/orm.svg)](LICENSE.md)
 ---
 
 
-### Authors
-Arpit Aggarwal Shantam Bajpai
+### Author
+Arpit Aggarwal
 
 
 ### Results
@@ -70,3 +70,10 @@ y-coordinate of the goal node(in meters):
 ```
 
 After entering all these values in the terminal, the Informed RRT-star algorithm finds the optimum path between the entered start node and goal node.
+
+
+### Credits
+The following links were helpful for completing this project:
+1. https://github.com/Mayavan/RRT-star-path-planning-with-turtlebot
+2. https://arxiv.org/abs/1404.2334
+3. https://github.com/AtsushiSakai/PythonRobotics
