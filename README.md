@@ -9,23 +9,23 @@ Arpit Aggarwal
 
 
 ### Results
-The following is an example of Informed RRT-star algorithm applied on a rigid robot:
+The results obtained using Informed RRT-star algorithm on a rigid robot:
 ![Screenshot](output/case2_informedrrtstar_10000_29.jpg)
 
-The following is an example of RRT-star algorithm applied on a rigid robot:
+The results obtained using RRT-star algorithm on a rigid robot:
 ![Screenshot](output/case2_rrtstar_10000_13.jpg)
 
 
 ### Software Required
-For this project you will need to install the rospy, numpy, matplotlib and gazebo to run the simulations.
+To run the code, you will need to install numpy, rospy, matplotlib and gazebo.
 
 
 ### Simulation platforms used
-For the simulation we used the gazebo and turtlebot2 package. The world file is located in the world folder and defines the setup of the gazebo environment.
+For the simulations, we used the gazebo and turtlebot2 package. The world file is located in the world folder and defines the setup of the gazebo environment.
 
 
 ### Instructions for running the code
-For running the code please follow the detailed instructions given below.
+For running the code, follow the detailed instructions given below.
 First we create a catkin workspace for our project
 
 ```
@@ -59,7 +59,7 @@ source ./devel/setup.bash
 roslaunch turtlebot_rrt demo.launch x:=4 y:=3 yaw:=0
 ```
 
-Above as you can see in the end I have given the x,y and yaw arguments in the command line. This indicates the initial spawn position of the turtlebot in the gazebo environment. The coordinates are represented by (x,y) and the orientation is given by the yaw argument.
+Above as you can see in the end, we have given the x,y and yaw arguments in the command line. This indicates the initial spawn position of the turtlebot in the gazebo environment. The coordinates are represented by (x,y) and the orientation is given by the yaw argument.
 Once you run the environment a second terminal will pop up in which you need to enter the following information:
 
 ```
@@ -73,7 +73,7 @@ After entering all these values in the terminal, the Informed RRT-star algorithm
 
 
 ### Credits
-The following links were helpful for completing this project:
+The following links were helpful for this project:
 1. https://github.com/Mayavan/RRT-star-path-planning-with-turtlebot
 2. https://arxiv.org/abs/1404.2334
 3. https://github.com/AtsushiSakai/PythonRobotics
